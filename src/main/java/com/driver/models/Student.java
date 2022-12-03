@@ -10,8 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "student")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
