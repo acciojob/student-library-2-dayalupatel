@@ -10,9 +10,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "txn")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Builder
 public class Transaction {
 
