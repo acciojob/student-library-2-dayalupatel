@@ -2,8 +2,10 @@ package com.driver.services;
 
 import com.driver.models.Author;
 import com.driver.models.Book;
+import com.driver.models.Card;
 import com.driver.repositories.AuthorRepository;
 import com.driver.repositories.BookRepository;
+import com.driver.repositories.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,14 @@ public class BookService {
     @Autowired
     AuthorRepository authorRepository;
 
+    @Autowired
+    CardRepository cardRepository;
+
     public void createBook(Book book){
         Author author = book.getAuthor();
 
         if(author!=null) {
+            author = authorRepository.findById(author.getId()).get();
             List<Book> bookWritten = author.getBooksWritten();
             if(bookWritten==null) {
                 bookWritten = new ArrayList<>();
@@ -30,6 +36,12 @@ public class BookService {
             bookWritten.add(book);
             author.setBooksWritten(bookWritten);
             authorRepository.save(author);
+            book.setAuthor(author);
+        }
+        Card card = book.getCard();
+        if(card!=null) {
+           card = cardRepository.findById(card.getId()).get();
+           book.setCard(card);
         }
         bookRepository2.save(book);
     }
