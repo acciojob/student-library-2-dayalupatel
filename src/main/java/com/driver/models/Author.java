@@ -7,10 +7,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "author")
+//@Table(name = "author")
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
 public class Author {
 
@@ -38,7 +37,14 @@ public class Author {
         this.age = age;
         this.country = country;
     }
-
+    public Author(int id, String name, String email, int age, String country, List<Book> booksWritten) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.country = country;
+        this.booksWritten = booksWritten;
+    }
 
 }
 

@@ -8,10 +8,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "book")
+//@Table(name = "book")
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
 public class Book {
 
@@ -49,6 +48,15 @@ public class Book {
         this.name = name;
         this.genre = genre;
         this.author = author;
+    }
+    public Book(int id, String name, Genre genre, Author author, Card card, boolean available, List<Transaction> transactions) {
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.card = card;
+        this.available = available;
+        this.transactions = transactions;
     }
 }
 

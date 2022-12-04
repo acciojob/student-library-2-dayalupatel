@@ -9,10 +9,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "student")
+//@Table(name = "student")
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
 public class Student {
 
@@ -34,16 +33,6 @@ public class Student {
     @JsonIgnoreProperties("student")
     private Card card;
 
-    public Student() {
-
-    }
-    public Student(String emailId, String name, int age, String country) {
-        this.emailId = emailId;
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
 
     @CreationTimestamp
     private Date createdOn;
@@ -62,6 +51,27 @@ public class Student {
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 '}';
+    }
+
+    public Student() {
+
+    }
+    public Student(String emailId, String name, int age, String country) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
+
+    public Student(int id, String emailId, String name, int age, String country, Card card, Date createdOn, Date updatedOn) {
+        this.id = id;
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
+        this.card = card;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
     }
 
 

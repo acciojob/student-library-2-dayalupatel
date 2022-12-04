@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "card")
+//@Table(name = "card")
 @Getter
 @Setter
 @AllArgsConstructor

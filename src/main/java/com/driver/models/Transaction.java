@@ -9,11 +9,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "txn")
 @Getter
 @Setter
-@AllArgsConstructor
-@RequiredArgsConstructor
 @Builder
 public class Transaction {
 
@@ -43,5 +40,11 @@ public class Transaction {
 
     @CreationTimestamp
     private Date transactionDate;
+
+    public Transaction(){
+
+    }
+
+
 }
 
