@@ -12,6 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class Transaction {
 
     @Id
