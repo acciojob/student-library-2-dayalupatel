@@ -13,7 +13,6 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Builder
 public class Student {
 
@@ -34,6 +33,16 @@ public class Student {
     @JoinColumn   // join this column to the primary key of Card table
     @JsonIgnoreProperties("student")
     private Card card;
+
+    public Student() {
+
+    }
+    public Student(String emailId, String name, int age, String country) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
 
 
     @CreationTimestamp

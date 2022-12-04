@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Builder
 public class Author {
 
@@ -29,6 +28,17 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("author")
     private List<Book> booksWritten;
+
+    public Author() {
+
+    }
+    public Author(String name, String email, int age, String country) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.country = country;
+    }
+
 
 }
 
