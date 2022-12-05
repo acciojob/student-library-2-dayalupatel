@@ -35,14 +35,10 @@ public class BookService {
             }
             bookWritten.add(book);
             author.setBooksWritten(bookWritten);
-            authorRepository.save(author);
-            book.setAuthor(author);
+//            authorRepository.save(author);
+//            book.setAuthor(author);
         }
-        Card card = book.getCard();
-        if(card!=null) {
-           card = cardRepository.findById(card.getId()).get();
-           book.setCard(card);
-        }
+
         bookRepository2.save(book);
     }
 
