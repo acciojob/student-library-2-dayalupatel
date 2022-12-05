@@ -57,10 +57,10 @@ public class TransactionService {
         boolean cardExists = cardRepository5.existsById(cardId);
         if(cardExists==false) {
             transactionRepository5.save(issueTransaction);
-            throw new Exception("Book is either unavailable or not present");
+            throw new Exception("Card is invalid");
         }
         Card card = cardRepository5.findById(cardId).get();
-        if(card.getCardStatus()== CardStatus.DEACTIVATED) {
+        if( card.getCardStatus().equals(CardStatus.DEACTIVATED) ) {
             transactionRepository5.save(issueTransaction);
             throw new Exception("Card is invalid");
         }
@@ -84,7 +84,7 @@ public class TransactionService {
         issueTransaction.setTransactionStatus(TransactionStatus.SUCCESSFUL);
         issueTransaction.setIssueOperation(true);
 
-        transactionRepository5.save(issueTransaction);
+
 
         // Adding Book in the card
         booksInCard.add(book);
@@ -94,7 +94,16 @@ public class TransactionService {
         // Adding Card To book && make book Unavailable to others
         book.setCard(card);
         book.setAvailable(false);
+        List<Transaction> transactions = book.getTransactions();
+        if ( transactions == null) {
+            transactions = new ArrayList<>();
+        }
+        transactions.add(issueTransaction);
+        book.setTransactions(transactions);
+
         bookRepository5.save(book);
+
+        transactionRepository5.save(issueTransaction);
 
        return issueTransaction.getTransactionId(); //return transactionId instead
     }
@@ -137,18 +146,18 @@ public class TransactionService {
                 .build();
 
         // Removing the Book from card BookList
-        Card card = cardRepository5.findById(cardId).get();
-        List<Book> booksInCard = card.getBooks();
-        Iterator<Book> iterator = booksInCard.iterator();
-        while(iterator.hasNext()) {
-            Book currBook = iterator.next();
-            if(currBook.getId()==bookId) {
-                iterator.remove();
-            }
-        }
-        card.setBooks(booksInCard);
-
-        cardRepository5.save(card);
+//        Card card = cardRepository5.findById(cardId).get();
+//        List<Book> booksInCard = card.getBooks();
+//        Iterator<Book> iterator = booksInCard.iterator();
+//        while(iterator.hasNext()) {
+//            Book currBook = iterator.next();
+//            if(currBook.getId()==bookId) {
+//                iterator.remove();
+//            }
+//        }
+//        card.setBooks(booksInCard);
+//
+//        cardRepository5.save(card);
 
         // saving transaction
         transactionRepository5.save(returnBookTransaction);
