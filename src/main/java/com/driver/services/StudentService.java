@@ -1,41 +1,30 @@
 package com.driver.services;
 
-import com.driver.models.Card;
-import com.driver.models.CardStatus;
-import com.driver.models.Student;
-import com.driver.repositories.CardRepository;
 import com.driver.repositories.StudentRepository;
+import com.driver.models.Card;
+import com.driver.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentService {
+
     @Autowired
     CardService cardService4;
 
     @Autowired
     StudentRepository studentRepository4;
 
-    @Autowired
-    CardRepository cardRepository;
-
     public Student getDetailsByEmail(String email){
-        Student student = studentRepository4.findByEmailId(email);
-
-        return student;
+        return studentRepository4.findByEmailId(email);
     }
 
     public Student getDetailsById(int id){
-        Student student = studentRepository4.findById(id).get();
-
-        return student;
+        return studentRepository4.findById(id).get();
     }
 
     public void createStudent(Student student){
-        Card card = cardService4.createAndReturn(student);
-        student.setCard(card);
-
-        studentRepository4.save(student);
+        Card newCard = cardService4.createAndReturn(student);
     }
 
     public void updateStudent(Student student){
@@ -43,10 +32,7 @@ public class StudentService {
     }
 
     public void deleteStudent(int id){
-        // Deactivating corresponding card
         cardService4.deactivateCard(id);
-
-        //Delete student
         studentRepository4.deleteCustom(id);
     }
 }
